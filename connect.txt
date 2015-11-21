@@ -1,0 +1,4 @@
+AWS MySQL
+domain: dinos.c84qpv2crolk.us-east-1.rds.amazonaws.com
+db: bones
+user: dinodba
