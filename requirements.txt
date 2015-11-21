@@ -1,0 +1,2 @@
+elasticsearch-dsl==0.0.9
+ipython==4.0.0
