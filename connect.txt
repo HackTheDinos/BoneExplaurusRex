@@ -2,3 +2,9 @@ AWS MySQL
 domain: dinos.c84qpv2crolk.us-east-1.rds.amazonaws.com
 db: bones
 user: dinodba
+
+
+Bonsai Elastic Search:
+access_key: wtfk1moh2k
+elastic_search_cluster_uri: https://wtfk1moh2k:hwf9jytoe8@boneexplorus-7582625496.us-east-1.bonsai.io
+
