@@ -22,7 +22,7 @@ print('Loading function')
 
 s3 = boto3.client('s3')
 config = configparser.ConfigParser()
-
+TEMP_FILE_PATH = '/tmp/temp.zip'
 S3_FILE_FORMAT = 'https://s3.amazonaws.com/{bucket}/{key}'
 scan_properties = {
     'string': {
@@ -81,9 +81,9 @@ def _dateparse(datelike):
 def _process_zip(response, key, bucket):
     zip_data = {}
     print("parsing the zip")
-    with open('temp.zip', 'w') as file_n:
+    with open(TEMP_FILE_PATH, 'w') as file_n:
         file_n.writelines(response['Body'])
-    zfp = ZipFile('/tmp/temp.zip')
+    zfp = ZipFile(TEMP_FILE_PATH)
     print("zip read")
     stl_files = [f for f in zfp.namelist() if '.stl' in f][0]
     pca_files = [f for f in zfp.namelist() if '.pca' in f][0]
