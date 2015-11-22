@@ -94,7 +94,8 @@ def _process_zip(response, key, bucket):
         s3.put_object(
             Body=stl_file,
             Key=stl_key,
-            Bucket=bucket
+            Bucket=bucket,
+            use_ssl=False
         )
         zip_data.update(stl_uri=S3_FILE_FORMAT.format(bucket=bucket, key=key))
     if pca_files:
