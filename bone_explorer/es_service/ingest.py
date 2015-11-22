@@ -83,7 +83,7 @@ def _process_zip(response, key, bucket):
     print("parsing the zip")
     with open('temp.zip', 'w') as file_n:
         file_n.writelines(response['Body'])
-    zfp = ZipFile('temp.zip')
+    zfp = ZipFile('/tmp/temp.zip')
     print("zip read")
     stl_files = [f for f in zfp.namelist() if '.stl' in f][0]
     pca_files = [f for f in zfp.namelist() if '.pca' in f][0]
@@ -140,7 +140,7 @@ def ingest(event, context):
         }
         params.update(zip_data)
         scan = Scan(
-            s3uri=s3uri,
+            s3_uri=s3uri,
             species_suggest=params['species'],
             genus_suggest=params['genus'],
             **params)

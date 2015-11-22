@@ -14,7 +14,7 @@ from elasticsearch_dsl import (
 class Scan(DocType):
     genus = String()
     species = String()
-    s3uri = String()
+    s3_uri = String()
     genus_suggest = Completion(
         analyzer='simple',
         payloads=True,
