@@ -24,6 +24,8 @@ s3 = boto3.client('s3')
 config = configparser.ConfigParser()
 TEMP_FILE_PATH = '/tmp/temp.zip'
 S3_FILE_FORMAT = 'https://s3.amazonaws.com/{bucket}/{key}'
+
+# map of types -> keys for the Scan model creation
 scan_properties = {
     'string': {
         'genus',
@@ -38,6 +40,7 @@ scan_properties = {
     }
 }
 
+# map of config section -> keys to extract for pca data
 config_keys = {
     'CalibValue': {
         'averaging',
@@ -81,13 +84,18 @@ def _dateparse(datelike):
 def _process_zip(response, key, bucket):
     zip_data = {}
     print("parsing the zip")
+    # opent the content of the zip and stream the contents into a temp zip file
     with open(TEMP_FILE_PATH, 'w') as file_n:
-        file_n.writelines(response['Body'])
+        file_n.writelines(response['Body'].read())
     zfp = ZipFile(TEMP_FILE_PATH)
     print("zip read")
-    stl_files = [f for f in zfp.namelist() if '.stl' in f][0]
-    pca_files = [f for f in zfp.namelist() if '.pca' in f][0]
+
+    # get the stl_files and pca_files
+    stl_files = [f for f in zfp.namelist() if '.stl' in f]
+    pca_files = [f for f in zfp.namelist() if '.pca' in f]
+
     if stl_files:
+        # if they exist pull the first one and create an s3 object from it
         print("stl file exists!")
         stl_file = zfp.read(stl_files[0])
         stl_key = "{bucket}{key}_stl".format(bucket=bucket, key=key)
@@ -95,10 +103,15 @@ def _process_zip(response, key, bucket):
             Body=stl_file,
             Key=stl_key,
             Bucket=bucket,
-            use_ssl=False
+            use_ssl=False,
+            ACL='public-read'
         )
-        zip_data.update(stl_uri=S3_FILE_FORMAT.format(bucket=bucket, key=key))
+
+        # update the zip date with the uri for the stl_file
+        zip_data.update(stl_uri=S3_FILE_FORMAT.format(bucket=bucket, key=stl_key))
+
     if pca_files:
+        # if the pca file exists, extract its meaning data
         print("pca file exists!")
         pca_file = zfp.read(pca_files[0])
         config_file = config.read(pca_file)
@@ -117,18 +130,26 @@ def ingest(event, context):
     key = urllib.unquote_plus(
         event['Records'][0]['s3']['object']['key']
     ).decode('utf8')
+
     try:
+        # grab the response
         response = s3.get_object(Bucket=bucket, Key=key)
-        s3uri = S3_FILE_FORMAT.format(
+        s3_uri = S3_FILE_FORMAT.format(
             bucket=bucket,
             key=key
         )
+
         zip_data = {}
+
+        # set the permissions as public-read
         s3.put_object_acl(ACL='public-read', Bucket=bucket, Key=key)
         metadata = response['Metadata']
+
         if metadata.get('parse_zip'):
+            # only parse the zip if we want them
             zip_data = _process_zip(response, key, bucket)
 
+        # get model's parameters from meta
         params = {
             key: metadata.get(key, 'N/A').lower()
             if t != 'date'
@@ -139,14 +160,17 @@ def ingest(event, context):
             for key in keys
         }
         params.update(zip_data)
+
         scan = Scan(
-            s3_uri=s3uri,
+            s3_uri=s3_uri,
             species_suggest=params['species'],
             genus_suggest=params['genus'],
             **params)
+        print("saving the scan %" % key)
         scan.save()
 
     except Exception as e:
         print(e)
         print('Error getting object {} from bucket {}. Make sure they exist and your bucket is in the same region as this function.'.format(key, bucket))
         raise e
+    context.close()
