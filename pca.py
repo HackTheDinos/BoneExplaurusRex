@@ -15,13 +15,14 @@ def ConfigSectionMap(section):
             print("exception on %s!" % option)
             dict1[option] = None
     return dict1
-    
+
+
 averaging = ConfigSectionMap('CalibValue')['averaging']
 skip = ConfigSectionMap('CalibValue')['skip']
 timingVal = ConfigSectionMap('Detector')['timingval']
 current = ConfigSectionMap('Xray')['current']
+voxX = ConfigSectionMap('Geometry')['voxelsizex']
+voxY = ConfigSectionMap('Geometry')['voxelsizey']
 
-print(averaging)
-print(skip)
-print(timingVal)
-print(current)
+d = dict(averaging = averaging, skip = skip, timingVal = timingVal, current = current, voxX = voxX, voxY = voxY)
+print(d)
