@@ -32,7 +32,7 @@ class Scan(DocType):
     scan_date = Date()
     scientist = String()
     institution = String()
-    thumbnail_key = String()
+    thumbnail_uri = String()
     faculty_archive = String()
     stl_uri = String()
     averaging = Float()

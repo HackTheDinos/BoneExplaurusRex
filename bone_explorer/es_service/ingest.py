@@ -32,7 +32,6 @@ scan_properties = {
         'species',
         'scientist',
         'institution',
-        'thumbnail_key',
         'faculty_archive',
     },
     'date': {
@@ -98,7 +97,7 @@ def _process_zip(response, key, bucket):
         # if they exist pull the first one and create an s3 object from it
         print("stl file exists!")
         stl_file = zfp.read(stl_files[0])
-        stl_key = "{bucket}{key}_stl".format(bucket=bucket, key=key)
+        stl_key = "{bucket}_{key}_stl.stl".format(bucket=bucket, key=key.split('.')[0])
         s3.put_object(
             Body=stl_file,
             Key=stl_key,
@@ -164,6 +163,7 @@ def ingest(event, context):
             s3_uri=s3_uri,
             species_suggest=params['species'],
             genus_suggest=params['genus'],
+            thumbnail_uri=S3_FILE_FORMAT.format(bucket=bucket, key=params['thumbnail_uri']),
             **params)
         print("saving the scan %s" % key)
         scan.save()
@@ -172,4 +172,3 @@ def ingest(event, context):
         print(e)
         print('Error getting object {} from bucket {}. Make sure they exist and your bucket is in the same region as this function.'.format(key, bucket))
         raise e
-    context.close()
