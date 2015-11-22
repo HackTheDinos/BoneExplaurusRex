@@ -1,7 +1,6 @@
 // Requires: 
-// <script src="http://lazarsoft.info/objstl/three.min.js"></script>
-// <script src="http://lazarsoft.info/objstl/RequestAnimationFrame.js"></script>
-// <script src="http://lazarsoft.info/objstl/objstl.js"></script>
+// <script src="three.min.js"></script>
+// <script src="objstl.js"></script>
 // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 // <div id="webgl"> is where the 3d stuff will be crammed in to

@@ -61,17 +61,17 @@ function ev_mousewheel(e)
 }
 function init()
 {
-	container = document.getElementById("webgl");
+	container = document.getElementById("webgl")
 	var width = container.clientWidth;
 	var height = container.clientHeight;
 
 	camera = new THREE.PerspectiveCamera(45,width/height,0.1,10000);
-	camera.position.z = 500;
+	camera.position.z = 350;
 
 	scene = new THREE.Scene();
 
 	//scene.add(camera);
-	material = new THREE.MeshLambertMaterial({color: 0xCCCCCC,wireframe: false});
+	material = new THREE.MeshLambertMaterial({color: 0x3D6482,wireframe: false});
 
 	var pointLight = new THREE.PointLight( 0xFFFFFF );
 
