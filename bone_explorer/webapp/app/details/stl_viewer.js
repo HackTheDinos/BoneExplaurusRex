@@ -1,16 +1,13 @@
-// Requires: 
+var $ = require('jquery/dist/jquery.js');
+// var Three = require('three/three.js');
+// var ObjSTL = require('./objstl.js');
+
+// Requires:
 // <script src="three.min.js"></script>
 // <script src="objstl.js"></script>
 // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 // <div id="webgl"> is where the 3d stuff will be crammed in to
-
-$(document).ready(function() { 
-	load();
-	
-	// Don't ask :p
-	$('body').append('<div id="centered" class="centered" ></div>');
-})
 
 function loadStl(url) {
 		var xhr = new XMLHttpRequest();
@@ -27,14 +24,23 @@ function loadStl(url) {
 					}
 
 					f = {name: url};
-                    buildGeometry(stl, f);     						
+                    buildGeometry(stl, f);
 				} else {
 					console.log("Got status code " + this.status + " trying to load STL file.");
-				}							
+				}
 		}
 		xhr.onerror = function(e) {
 			console.log("Error loading STL over AJAX, " + e);
 		}
 
-		xhr.send();                                       
+		xhr.send();
 }
+
+module.exports = function (url) {
+	load();
+
+	// Don't ask :p
+	$('body').append('<div id="centered" class="centered" ></div>');
+
+	loadStl(url);
+};

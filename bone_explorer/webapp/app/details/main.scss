@@ -1,0 +1,23 @@
+@import "../config";
+@import "~susy/sass/susy";
+
+h2 {
+  font-size: 2em;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  padding: 0 0.5rem;
+}
+
+h3 {
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  padding: 0 0.5rem;
+}
+
+p {
+  padding-top: 1em;
+}
+
+img {
+  margin-bottom: 1em;
+}
