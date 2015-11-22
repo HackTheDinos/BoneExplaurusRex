@@ -32,9 +32,13 @@ def ingest(event, context):
             key=key
         )
         s3.put_object_acl(ACL='public-read', Bucket=bucket, Key=key)
+        genus = response['Metadata'].get('genus', 'N/A')
+        species = response['Metadata'].get('species', 'N/A')
         params = dict(
-            species=response['Metadata'].get('species', 'N/A'),
-            genus=response['Metadata'].get('genus', 'N/A')
+            species=species,
+            species_suggest=species,
+            genus=genus,
+            genus_suggest=genus
         )
         scan = Scan(s3uri=s3uri, **params)
         scan.save()
