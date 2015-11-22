@@ -1,22 +1,26 @@
 {
-  "name": "paleo-webapp",
+  "name": "BonExplaurusRex",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "css-loader": "^0.23.0",
     "extract-text-webpack-plugin": "^0.9.1",
-    "style-loader": "^0.13.0",
-    "webpack": "^1.12.8"
-  },
-  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7",
+    "html-webpack-plugin": "^1.6.2",
     "node-sass": "^3.4.2",
     "sass-loader": "^3.1.1",
-    "webpack": "^1.12.8"
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.8",
+    "webpack-dev-server": "^1.12.1"
   },
   "scripts": {
+    "build": "webpack --progress --colors",
+    "watch": "webpack --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Joseph Spens",
+  "license": "MIT"
 }

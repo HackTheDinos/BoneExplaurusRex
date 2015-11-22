@@ -1,2 +1,3 @@
-require('./main.scss');
+require('./index.scss');
+
 console.log(require('./entry.js'));
