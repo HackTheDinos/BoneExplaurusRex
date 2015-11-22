@@ -1,6 +1,12 @@
 # BoneExplaurusRex
 
-A Search and Content Management Service for CT & STL image data
+A search and content management service for CT scan data. Users can 
+search for content by genus or species. Results returned include all available
+documents: zips of tifs; STL; PCA files; etc. 
+
+Technologies used: Python, JavaScript, ElasticSearch, webpack, AWS, lambda, S3,
+backbone, Sass, pencils. 
+
 
 Team Members:
 
@@ -9,5 +15,5 @@ Team Members:
 * Joe Spens
 * Anya Lipinska
 * Lucio Tolentino
-* Johnny Cihocki
-* Joe Willaje
+* Johnny Souvlaki
+* Joe Willage

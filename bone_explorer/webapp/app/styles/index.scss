@@ -1,0 +1,12 @@
+@import "config";
+
+@import "~susy/sass/susy";
+
+body {
+  background-color: $off-white;
+}
+
+.main {
+  @include container;
+  background-color: $white;
+}

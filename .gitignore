@@ -8,3 +8,5 @@ bone_explorer/webapp/dist
 
 # MACS
 .DS_Store
+
+secrets.*
