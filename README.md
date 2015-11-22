@@ -15,5 +15,5 @@ Team Members:
 * Joe Spens
 * Anya Lipinska
 * Lucio Tolentino
-* Johnny Cihocki
+* Johnny Souvlaki
 * Joe Willage
