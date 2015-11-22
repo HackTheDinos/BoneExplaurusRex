@@ -1,6 +1,6 @@
 var $ = require('jquery/dist/jquery.js');
-var Three = require('three/three.js');
-var ObjSTL = require('./objstl.js');
+// var Three = require('three/three.js');
+// var ObjSTL = require('./objstl.js');
 
 // Requires:
 // <script src="three.min.js"></script>
@@ -36,13 +36,11 @@ function loadStl(url) {
 		xhr.send();
 }
 
-module.exports = function () {
+module.exports = function (url) {
 	load();
 
 	// Don't ask :p
 	$('body').append('<div id="centered" class="centered" ></div>');
 
-	return {
-		load: loadStl
-	};
+	loadStl(url);
 };
