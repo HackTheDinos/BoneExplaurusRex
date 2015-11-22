@@ -103,7 +103,6 @@ def _process_zip(response, key, bucket):
             Body=stl_file,
             Key=stl_key,
             Bucket=bucket,
-            use_ssl=False,
             ACL='public-read'
         )
 
