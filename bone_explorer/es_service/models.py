@@ -34,7 +34,7 @@ class Scan(DocType):
     institution = String()
     thumbnail_key = String()
     faculty_archive = String()
-    sti_url = String()
+    stl_uri = String()
     averaging = Float()
     skip = Float()
     timingval = Float()

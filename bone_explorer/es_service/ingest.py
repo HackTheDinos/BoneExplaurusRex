@@ -32,7 +32,6 @@ scan_properties = {
         'institution',
         'thumbnail_key',
         'faculty_archive',
-        'stl_uri'
     },
     'date': {
         'scan_date',
@@ -80,6 +79,7 @@ def _dateparse(datelike):
 
 
 def _process_zip(response, key, bucket):
+    zip_data = {}
     print("parsing the zip")
     with open('temp.zip', 'w') as file_n:
         file_n.writelines(response['Body'])
@@ -90,12 +90,13 @@ def _process_zip(response, key, bucket):
     if stl_files:
         print("stl file exists!")
         stl_file = zfp.read(stl_files[0])
-        stl_key = S3_FILE_FORMAT.format(bucket=bucket, key=key)
+        stl_key = "{bucket}{key}_stl".format(bucket=bucket, key=key)
         s3.put_object(
             Body=stl_file,
             Key=stl_key,
             Bucket=bucket
         )
+        zip_data.update(stl_uri=S3_FILE_FORMAT.format(bucket=bucket, key=key))
     if pca_files:
         print("pca file exists!")
         pca_file = zfp.read(pca_files[0])
