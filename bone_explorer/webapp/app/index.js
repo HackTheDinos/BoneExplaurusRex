@@ -1,3 +1,6 @@
-require('./styles/index.scss');
+var search = require('./search/main.js');
 
-console.log(require('./entry.js'));
+require('normalize-css/normalize.css');
+require('./index.scss');
+
+search();

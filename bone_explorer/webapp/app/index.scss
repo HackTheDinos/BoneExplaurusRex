@@ -1,0 +1,30 @@
+@import "config";
+@import "~susy/sass/susy";
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  @include container;
+}
+
+header {
+  @include container;
+  padding-top: 2em;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 4em;
+}
+
+.button {
+  background-color: $blue;
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  color: $white;
+}
