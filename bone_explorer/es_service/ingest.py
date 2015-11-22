@@ -166,7 +166,7 @@ def ingest(event, context):
             species_suggest=params['species'],
             genus_suggest=params['genus'],
             **params)
-        print("saving the scan %" % key)
+        print("saving the scan %s" % key)
         scan.save()
 
     except Exception as e:
