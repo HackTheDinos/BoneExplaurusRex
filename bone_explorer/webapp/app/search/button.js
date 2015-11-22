@@ -83,6 +83,11 @@ function submitSearch() {
         checkbox.setAttribute('name', 'download[]');
         checkbox.setAttribute('value', model.s3uri);
         item.appendChild(checkbox);
+
+        var downloadLink = document.createElement('a');
+        downloadLink.setAttribute('href', model.s3uri);
+        downloadLink.setAttribute('target', '_blank');
+        item.appendChild(downloadLink);
       }
 
       if (model.thumbnail) {

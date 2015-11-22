@@ -1,13 +1,27 @@
-var $ = require('jquery/dist/jquery.js');
-// var Three = require('three/three.js');
-// var ObjSTL = require('./objstl.js');
-
 // Requires:
 // <script src="three.min.js"></script>
 // <script src="objstl.js"></script>
 // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 // <div id="webgl"> is where the 3d stuff will be crammed in to
+
+$(document).ready(function() {
+	var main = document.querySelector('.main');
+	var webgl = document.createElement('div');
+  webgl.setAttribute('id', 'webgl');
+	webgl.setAttribute('style', 'height:400px;');
+	webgl.addEventListener("mousewheel", MouseWheelHandler, false);
+	webgl.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+  main.appendChild(webgl);
+	load();
+
+	// Don't ask :p
+	$('body').append('<div id="centered" class="centered" ></div>');
+})
+
+function MouseWheelHandler(event){
+	event.stopPropagation();
+}
 
 function loadStl(url) {
 		var xhr = new XMLHttpRequest();
@@ -35,12 +49,3 @@ function loadStl(url) {
 
 		xhr.send();
 }
-
-module.exports = function (url) {
-	load();
-
-	// Don't ask :p
-	$('body').append('<div id="centered" class="centered" ></div>');
-
-	loadStl(url);
-};

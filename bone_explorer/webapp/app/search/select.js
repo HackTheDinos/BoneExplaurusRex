@@ -5,9 +5,14 @@ var elasticsearch = require('elasticsearch/src/elasticsearch.js');
 require('selectize/dist/css/selectize.default.css');
 
 module.exports = function (main, type) {
+  var label = document.createElement('label');
+  label.appendChild(document.createTextNode(type == 'genus' ? 'Genus' : 'Species'));
+
   var selectElement = document.createElement('select');
   selectElement.classList.add('search--' + type + '-select');
-  main.appendChild(selectElement);
+  label.appendChild(selectElement);
+
+  main.appendChild(label);
 
   $(selectElement).selectize({
     valueField: 'text',
