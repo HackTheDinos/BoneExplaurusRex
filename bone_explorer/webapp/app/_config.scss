@@ -2,11 +2,12 @@
 // -----------------------------------------------------------------------------
 $white: #fff;
 $off-white: #dedede;
+$blue: #ccf;
 
 /////// Page dimension configuration ///////
 // -----------------------------------------------------------------------------
 $susy: (
   columns: 12,
-  container: 80em,
+  container: 1140px,
   global-box-sizing: border-box
 );
