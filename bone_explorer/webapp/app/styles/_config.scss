@@ -1,0 +1,12 @@
+/////// Config defaults for site colors ///////
+// -----------------------------------------------------------------------------
+$white: #fff;
+$off-white: #dedede;
+
+/////// Page dimension configuration ///////
+// -----------------------------------------------------------------------------
+$susy: (
+  columns: 12,
+  container: 80em,
+  global-box-sizing: border-box
+);

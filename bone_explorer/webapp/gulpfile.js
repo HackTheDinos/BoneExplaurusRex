@@ -25,6 +25,7 @@ gulp.task("webpack-dev-server", function(callback) {
   var compiler = webpack(myConfig);
 
   new WebpackDevServer(compiler, {
+    hot: true,
     publicPath: "/" + myConfig.output.publicPath,
     stats: {
       colors: true
