@@ -30,7 +30,6 @@ scan_properties = {
     },
     'date': {
         'scan_date',
-        'dig_date'
     }
 }
 

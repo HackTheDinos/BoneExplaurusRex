@@ -30,7 +30,6 @@ class Scan(DocType):
         max_input_length=50
     )
     scan_date = Date()
-    dig_date = Date()
     scientist = String()
     institution = String()
     thumbnail_key = String()
