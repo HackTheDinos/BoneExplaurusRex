@@ -51,7 +51,12 @@ function submitSearch() {
     var resultsContainer = document.querySelector('.search--results');
     resultsContainer.innerHTML = '';
 
-    var results = _.pluck(response.hits.hits, '_source');
+    var results = response.hits.hits.map(function (result) {
+      var obj = result['_source'];
+      obj.id = result['_id'];
+      return obj;
+    });
+
     var hasAnyUri = _.some(results, function (result) { return result.s3uri; });
 
     if (hasAnyUri) {
@@ -88,7 +93,7 @@ function submitSearch() {
 
       if (model.id) {
         var headingLink = document.createElement('a');
-        headingLink.setAttribute('href', '/scans/' + model.id);
+        headingLink.setAttribute('href', '#scans/' + model.id);
       }
 
       var heading = document.createElement('h2');
