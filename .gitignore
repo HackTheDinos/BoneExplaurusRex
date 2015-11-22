@@ -5,4 +5,8 @@ species/
 # Front End
 bone_explorer/webapp/node_modules
 bone_explorer/webapp/dist
+
+# MACS
+.DS_Store
+
 secrets.*

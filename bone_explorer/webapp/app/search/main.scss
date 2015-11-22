@@ -1,0 +1,72 @@
+@import "../config";
+@import "~susy/sass/susy";
+
+.search {
+  &--genus-select {
+    @include span(6);
+    margin-bottom: 1em;
+
+    .-loaded & {
+      @include span(4);
+    }
+  }
+  &--species-select {
+    @include span(6 omega);
+    margin-bottom: 1em;
+
+    .-loaded & {
+      @include span(4);
+    }
+  }
+  &--button {
+    @include span(12 omega);
+    height: 50px;
+
+    .-loaded & {
+      @include span(4 omega);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  &--results {
+    @include span(12 omega);
+
+    .button {
+      margin-right: 1em;
+      margin-bottom: 50px;
+    }
+    input {
+      margin-right: 20px;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  &--results-item {
+    @include span(12 omega);
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 314px;
+      width: 314px;
+      margin-right: 54px;
+    }
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.selectize-control.single .selectize-input {
+  height: 50px;
+  font-size: 18px;
+  padding: 15px 25px;
+  text-transform: uppercase;
+
+  &::after {
+    right: 25px;
+  }
+}
