@@ -11,11 +11,36 @@ import boto3
 from models import Scan
 from secrets import ELASTIC_SEARCH_CLUSTER_URI
 from elasticsearch_dsl.connections import connections
+from datetime import date, datetime
+from dateutil.parser import parse as dateparse
+
 
 connections.create_connection(hosts=[ELASTIC_SEARCH_CLUSTER_URI])
 print('Loading function')
 
 s3 = boto3.client('s3')
+
+scan_properties = {
+    'string': {
+        'genus',
+        'species',
+        'scientist',
+        'institution',
+        'thumbnail_key',
+    },
+    'date': {
+        'scan_date',
+        'dig_date'
+    }
+}
+
+
+def _dateparse(datelike):
+    if isinstance(datelike, datetime):
+        return datelike
+    if isinstance(datelike, date):
+        return datetime.fromordinal(datelike.toordinal())
+    return dateparse(datelike)
 
 
 def ingest(event, context):
@@ -32,15 +57,21 @@ def ingest(event, context):
             key=key
         )
         s3.put_object_acl(ACL='public-read', Bucket=bucket, Key=key)
-        genus = response['Metadata'].get('genus', 'N/A')
-        species = response['Metadata'].get('species', 'N/A')
-        params = dict(
-            species=species,
-            species_suggest=species,
-            genus=genus,
-            genus_suggest=genus
-        )
-        scan = Scan(s3uri=s3uri, **params)
+        metadata = response['Metadata']
+        params = {
+            key: metadata.get(key, 'N/A').lower()
+            if t != 'date'
+            else _dateparse(
+                metadata.get(key, datetime.now())
+            )
+            for t, key in scan_properties.iteritems()
+        }
+
+        scan = Scan(
+            s3uri=s3uri,
+            species_suggest=params['species'],
+            genus_suggest=params['genus'],
+            **params)
         scan.save()
 
     except Exception as e:

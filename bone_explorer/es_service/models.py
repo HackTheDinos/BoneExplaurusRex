@@ -6,7 +6,9 @@
     Elastic Search Models
 """
 
-from elasticsearch_dsl import DocType, String, Completion
+from elasticsearch_dsl import (
+    DocType, String, Completion, Date
+)
 
 
 class Scan(DocType):
@@ -27,6 +29,11 @@ class Scan(DocType):
         perserve_position_increments=True,
         max_input_length=50
     )
+    scan_date = Date()
+    dig_date = Date()
+    scientist = String()
+    institution = String()
+    thumbnail_key = String()
 
     class Meta:
         index = 'ct_scans'
