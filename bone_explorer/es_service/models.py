@@ -34,6 +34,7 @@ class Scan(DocType):
     institution = String()
     thumbnail_key = String()
     faculty_archive = String()
+    sti_url = String()
 
     class Meta:
         index = 'ct_scans'

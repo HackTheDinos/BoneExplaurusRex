@@ -13,7 +13,8 @@ from secrets import ELASTIC_SEARCH_CLUSTER_URI
 from elasticsearch_dsl.connections import connections
 from datetime import date, datetime
 from dateutil.parser import parse as dateparse
-# from zipfile import ZipFile
+from zipfile import ZipFile
+from cStringIO import StringIO
 
 connections.create_connection(hosts=[ELASTIC_SEARCH_CLUSTER_URI])
 print('Loading function')
@@ -27,7 +28,8 @@ scan_properties = {
         'scientist',
         'institution',
         'thumbnail_key',
-        'faculty_archive'
+        'faculty_archive',
+        'stl_uri'
     },
     'date': {
         'scan_date',
