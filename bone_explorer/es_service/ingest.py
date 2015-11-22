@@ -13,7 +13,7 @@ from secrets import ELASTIC_SEARCH_CLUSTER_URI
 from elasticsearch_dsl.connections import connections
 from datetime import date, datetime
 from dateutil.parser import parse as dateparse
-
+# from zipfile import ZipFile
 
 connections.create_connection(hosts=[ELASTIC_SEARCH_CLUSTER_URI])
 print('Loading function')
@@ -27,6 +27,7 @@ scan_properties = {
         'scientist',
         'institution',
         'thumbnail_key',
+        'faculty_archive'
     },
     'date': {
         'scan_date',
@@ -63,7 +64,8 @@ def ingest(event, context):
             else _dateparse(
                 metadata.get(key, datetime.now())
             )
-            for t, key in scan_properties.iteritems()
+            for t, keys in scan_properties.iteritems()
+            for key in keys
         }
 
         scan = Scan(
