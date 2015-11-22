@@ -7,7 +7,7 @@
 """
 
 from elasticsearch_dsl import (
-    DocType, String, Completion, Date
+    DocType, String, Completion, Date, Float
 )
 
 
@@ -35,6 +35,12 @@ class Scan(DocType):
     thumbnail_key = String()
     faculty_archive = String()
     sti_url = String()
+    averaging = Float()
+    skip = Float()
+    timingval = Float()
+    current = Float()
+    voxelsizex = Float()
+    voxelsizey = Float()
 
     class Meta:
         index = 'ct_scans'
