@@ -19,6 +19,7 @@ var Router = Backbone.Router.extend({
 
   details: function (id) {
     details(id);
+    window.location.reload();
   }
 });
 

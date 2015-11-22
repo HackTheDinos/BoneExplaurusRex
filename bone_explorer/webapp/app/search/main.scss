@@ -9,6 +9,7 @@
 
     .-loaded & {
       @include span(4 omega);
+      margin-top: 1.2em;
     }
 
     &:focus {
