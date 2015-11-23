@@ -2,28 +2,14 @@
 @import "~susy/sass/susy";
 
 .search {
-  &--genus-select {
-    @include span(6);
-    margin-bottom: 1em;
-
-    .-loaded & {
-      @include span(4);
-    }
-  }
-  &--species-select {
-    @include span(6 omega);
-    margin-bottom: 1em;
-
-    .-loaded & {
-      @include span(4);
-    }
-  }
   &--button {
     @include span(12 omega);
     height: 50px;
+    text-transform: uppercase;
 
     .-loaded & {
       @include span(4 omega);
+      margin-top: 1.2em;
     }
 
     &:focus {
@@ -56,6 +42,23 @@
     }
     h2 {
       text-transform: uppercase;
+    }
+  }
+}
+
+label {
+  @include span(6);
+  margin-bottom: 1em;
+
+  .-loaded & {
+    @include span(4);
+  }
+
+  &:last-of-type {
+    @include span(6 omega);
+
+    .-loaded & {
+      @include span(4);
     }
   }
 }
